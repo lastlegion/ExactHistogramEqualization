@@ -1,0 +1,210 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+\usepackage{graphicx} %For inserting pictures
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{float} %For H floats
+%\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\graphicspath{ {../images/} }
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Dhirubhai Ambani Institute of Information and Communication Technology} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Assignment 2 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Ganesh Iyer \\ 201311019 \\Developed using: Python(Using SimpleCV library)}
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\section{Bitplanes}
+
+    \subsection{Bitplanes slicing}
+    In this problem we implemented a function mybitplane() that extracts all 8 bit planes of any input grayscale image I. 
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[clip,height=3cm]{lena}
+        \caption{Original Image}
+    \end{figure}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[clip,height=3cm]{BitPlane0}
+        \includegraphics[clip,height=3cm]{BitPlane1}
+        \includegraphics[clip,height=3cm]{BitPlane2}
+        \includegraphics[clip,height=3cm]{BitPlane3}
+        \includegraphics[clip,height=3cm]{BitPlane4}
+        \includegraphics[clip,height=3cm]{BitPlane5}
+        \includegraphics[clip,height=3cm]{BitPlane6}
+        \includegraphics[clip,height=3cm]{BitPlane7}
+        \caption{Bitplanes, Starting from Least significant bit(TopLeft) to Most significant bit in clockwise direction}
+    \end{figure}
+    As we can observe the most significant bits seem to have more information pertaining to the image
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[clip,height=3cm]{daiict}
+        \caption{Watermark}
+    \end{figure}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[clip,height=3cm]{WatermarkLevel0}
+        \includegraphics[clip,height=3cm]{WatermarkLevel1}
+        \includegraphics[clip,height=3cm]{WatermarkLevel2}
+        \includegraphics[clip,height=3cm]{WatermarkLevel3}
+        \includegraphics[clip,height=3cm]{WatermarkLevel4}
+        \includegraphics[clip,height=3cm]{WatermarkLevel5}
+        \includegraphics[clip,height=3cm]{WatermarkLevel6}
+        \includegraphics[clip,height=3cm]{WatermarkLevel7}
+        \caption{WaterMark applied on different layers of the original image. Starting from level 0(top-left) to level 7 in a clock-wise direction}
+    \end{figure}
+
+    %------------------------------------------------
+
+    \subsection{Watermarking}
+    In this exercise we use the binary image \texttt{daiict.bmp} that was provided as a watermark and replace the \(i^{th}\) bit plane of the image \texttt{lena.jpg} and reconstruct the gray scale image \(J_i\) for \(1 \leq i \leq 8\).
+    %------------------------------------------------
+
+\section{Histogram equalization}
+    In this exercise we wrote a function \texttt{myhisteq()} that applies histogram equalization on any input grayscale image. 
+    We use the transfomration function \\\(T(r_k) = (L-1)\sum_{j=0}^{k}p_R({r_j})\)
+
+     \begin{figure}[h!]
+        \centering
+        \includegraphics[clip,height=3cm]{histeq-my}
+        \includegraphics[clip,height=3cm]{histeq-scv}
+        \caption{Clockwise starting from top left; Original Image; Image output of our histogram equalization; Image output of built-in histogram equalization}
+    \end{figure}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[clip,height=5cm]{hist-orig}
+        \includegraphics[clip,height=5cm]{hist-my}
+        \includegraphics[clip,height=5cm]{hist-eq}
+        \caption{Clockwise starting from top left; Original Histogram; Output of our histogram equalization; Output of built-in histogram equalization}
+    \end{figure}
+
+\section{Convolution}
+We implemeneted a function \texttt{my2Dconv()} that takes an Image(\(I\)) and kernel(\(k\)) and output \(y=I*k\).         
+We use the following kernel:
+\(k = \begin{pmatrix}
+            1 & 2 & 1 \\
+            0 & 0 & 0 \\
+            -1 & -2 & -1
+            \end{pmatrix}
+\)
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[clip,height=3cm]{convolvemy}
+        \includegraphics[clip,height=3cm]{convolvescv}
+        \caption{Outputs using kernel(k). Left: Using my2DConv function. Right: Using built-in function}
+    \end{figure}
+
+\section{Deriving popular convolution masks}
+Given a \(3X3\) neighbourhood(\(F\)) of an image 
+    \\\(F = \begin{bmatrix}
+            f(-1,-1) && f(-1,0) && f(-1,1) \\
+            f(0,-1) && f(0,0) && f(0,1) \\ 
+            f(1,-1) && f(1,0) && f(1,1) 
+            \end{bmatrix}\)
+    \\
+    The equation of the actual plane
+    \\ \(g(x,y) = a + bx + cy. \)
+    Now we have \(F = G + \eta \)
+    \subsection{Finding \(\beta\)}
+    For this we use the \texttt{lstsq} function built-in Numpy for finding least square solution to a linear matrix equation.
+    This function solves the equation \(F=X\beta\) by computing \(\beta\) such that it minimizes the Euclidean 2-norm \(\|F-X\beta\|^2\). \\
+    We get the following values of a,b and c for the first \(3X3\) neighbourhood.
+    \\\( \beta = 
+        \begin{bmatrix}
+            161.0 && -0.5 && -0.5
+        \end{bmatrix}
+    \)
+
+    \subsection{Finding convolution masks}
+    We find the pseudo-inverse of X using the built-in function \texttt{pinv}. We get the following matrices for our convolution masks
+    \\\(M1 = \begin{bmatrix}
+            0.1 && 0.1 && 0.1 \\ 0.1 && 0.1 && 0.1 \\ 0.1 && 0.1 && 0.1
+
+        \end{bmatrix}
+      \\
+      M2 = \begin{bmatrix}
+           -0.2 && -0.2 && -0.2 \\ 0 && 0 && 0 \\ 0.2 && 0.2 && 0.2
+          \end{bmatrix}
+      \\
+      M3 = \begin{bmatrix}
+          -0.2 && 0 && 0.2 \\ -0.2 && 0 && 0.2 \\ -0.2 && 0 && 0.2
+            \end{bmatrix}
+     \)
+    \subsection{Finding convolution masks using error weights}
+    We multiply the noise weights with original masks to obtain new masks.
+    \\
+    \(
+      M_{w1} = \begin{bmatrix}
+            0.1 && 0.2 && 0.1\\
+            0.2 && 0.4 && 0.2\\
+            0.1 && 0.2 && 0.1
+          \end{bmatrix}
+      \\
+      M_{w2} = \begin{bmatrix}
+            -0.17 && -0.33 && -0.17\\
+              0 && 0 && 0  \\
+             0.17 && 0.33 && 0.17
+          \end{bmatrix}
+      \\
+      M_{w3} = \begin{bmatrix}
+            -0.17 &&  0 && 0.17 \\ 
+            -0.33 && 0 &&  0.33 \\ 
+            -0.17 && 0 &&  0.17
+          \end{bmatrix}
+    \)
+    \subsection{Results}
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[clip,height=3cm]{conv1}
+        \includegraphics[clip,height=3cm]{conv2}
+        \includegraphics[clip,height=3cm]{conv3}
+
+        \includegraphics[clip,height=3cm]{convw1}
+        \includegraphics[clip,height=3cm]{convw2}
+        \includegraphics[clip,height=3cm]{convw3}
+
+        \caption{Starting from top-left, results of applying the convolution masks dervied(\(M1,M2,M3,M_{w1}, M_{w2}, M_{w3}\)) in clockwise direction. }
+    \end{figure}
+        
+    We observe that the masks work like the masks for edge detection. Results of \(M2, M2\) are similar to Prewitt operator. Results of \(M_{w2}, M_{w3}\) are similar to Sobel mask in X and Y orientation.
+\end{document}
