@@ -37,11 +37,11 @@
 \normalfont \normalsize 
 \textsc{Dhirubhai Ambani Institute of Information and Communication Technology} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\huge Assignment 2 \\ % The assignment title
+\huge Assignment 3 \\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
-\author{Ganesh Iyer \\ 201311019 \\Developed using: Python(Using SimpleCV library)}
+\author{Ganesh Iyer \\ 201311019 \\Developed using: Python(SimpleCV)}
 
 \date{\normalsize\today} % Today's date or a custom date
 
@@ -53,158 +53,78 @@
 %	PROBLEM 1
 %----------------------------------------------------------------------------------------
 
-\section{Bitplanes}
+\section{Image Enhancement}
+    \subsection{Enhancing scene image}
+    In this problem we applied various contrast enhancement methods for improving the contrast of the given image.
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[clip,height=4cm]{scene}
+            \includegraphics[clip,height=4cm]{scenehist}
+            \caption{Original Image and corresponding histogram}
+        \end{figure}
 
-    \subsection{Bitplanes slicing}
-    In this problem we implemented a function mybitplane() that extracts all 8 bit planes of any input grayscale image I. 
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[clip,height=3cm]{lena}
-        \caption{Original Image}
-    \end{figure}
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[clip,height=3cm]{BitPlane0}
-        \includegraphics[clip,height=3cm]{BitPlane1}
-        \includegraphics[clip,height=3cm]{BitPlane2}
-        \includegraphics[clip,height=3cm]{BitPlane3}
-        \includegraphics[clip,height=3cm]{BitPlane4}
-        \includegraphics[clip,height=3cm]{BitPlane5}
-        \includegraphics[clip,height=3cm]{BitPlane6}
-        \includegraphics[clip,height=3cm]{BitPlane7}
-        \caption{Bitplanes, Starting from Least significant bit(TopLeft) to Most significant bit in clockwise direction}
-    \end{figure}
-    As we can observe the most significant bits seem to have more information pertaining to the image
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[clip,height=3cm]{daiict}
-        \caption{Watermark}
-    \end{figure}
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[clip,height=3cm]{WatermarkLevel0}
-        \includegraphics[clip,height=3cm]{WatermarkLevel1}
-        \includegraphics[clip,height=3cm]{WatermarkLevel2}
-        \includegraphics[clip,height=3cm]{WatermarkLevel3}
-        \includegraphics[clip,height=3cm]{WatermarkLevel4}
-        \includegraphics[clip,height=3cm]{WatermarkLevel5}
-        \includegraphics[clip,height=3cm]{WatermarkLevel6}
-        \includegraphics[clip,height=3cm]{WatermarkLevel7}
-        \caption{WaterMark applied on different layers of the original image. Starting from level 0(top-left) to level 7 in a clock-wise direction}
-    \end{figure}
+    From visually inspecting the image we realize that there is a very stark contrast in the image. We extracted the histogram of the image and from it we observe that there is a large concentration of pixels on the dark side. There is very little concentration in the middle of the histogram. Then near the higher intensities there is again a peak.
 
-    %------------------------------------------------
+    We applied various techniques for enhancing the contrast of the image. Details of the same are reported below.
+        \subsubsection{Log transformation}
+        We applied the log transformation as our aim is to spread the darker gray levels in the image over a higher range. We applied a transformation of the form
+        \\\(s = \frac{255}{log(1+255)} log(1+r)\)
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[clip,height=4cm]{logscene}
+            \includegraphics[clip,height=4cm]{logscenehist}
 
-    \subsection{Watermarking}
-    In this exercise we use the binary image \texttt{daiict.bmp} that was provided as a watermark and replace the \(i^{th}\) bit plane of the image \texttt{lena.jpg} and reconstruct the gray scale image \(J_i\) for \(1 \leq i \leq 8\).
-    %------------------------------------------------
+            \caption{Image and corresponding histogram obtained after applying log transformation and a gaussian blur with kernel size = 3}
+        \end{figure}
 
-\section{Histogram equalization}
-    In this exercise we wrote a function \texttt{myhisteq()} that applies histogram equalization on any input grayscale image. 
-    We use the transfomration function \\\(T(r_k) = (L-1)\sum_{j=0}^{k}p_R({r_j})\)
+        We obtain an image having much better contrast than the original image. We apply the gaussian blur to smoothen the image. It is evident from the histogram that there is a better distribution of the intensities in the transformed image. 
+        \subsubsection{Powerlaw transfromation}
+        The results from Log transformation encouraged us to experiment with powerlaw transformations(Gamma transfrorm) as its behaviour is similar to that of log transform when \(\gamma\) is fractional.
+        \\\(s = 255r^\gamma \)
 
-     \begin{figure}[h!]
-        \centering
-        \includegraphics[clip,height=3cm]{histeq-my}
-        \includegraphics[clip,height=3cm]{histeq-scv}
-        \caption{Clockwise starting from top left; Original Image; Image output of our histogram equalization; Image output of built-in histogram equalization}
-    \end{figure}
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[clip,height=5cm]{hist-orig}
-        \includegraphics[clip,height=5cm]{hist-my}
-        \includegraphics[clip,height=5cm]{hist-eq}
-        \caption{Clockwise starting from top left; Original Histogram; Output of our histogram equalization; Output of built-in histogram equalization}
-    \end{figure}
+        We experimented with various vales of \(\gamma\) the results of which are reported.
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[clip,height=4cm]{gamma67}
+            \includegraphics[clip,height=4cm]{gamma57}
+            \includegraphics[clip,height=4cm]{gamma47}
+            \includegraphics[clip,height=4cm]{gamma37}
+            \includegraphics[clip,height=4cm]{gamma20}
+            \includegraphics[clip,height=4cm]{gamma10}
+            \includegraphics[clip,height=4cm]{gamma04}
+            \caption{Images obtained by applying powerlaw transformation with values of \(\gamma = \{0.67,0.57, 0.47,0.37,0.20,0.10,0.04\}\)}
+        \end{figure}
+        From visually inspecting the images we find that the images obtained with \(\gamma\ \approx 0.37\) 
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[clip,height=4cm]{gamma37}
+            \caption{Images obtained by applying powerlaw transformation with value of \(\gamma = 0.37\) gave us the best results}
+        \end{figure}
+\subsection{Enhancing lctext.jpg}
+    In the exercise we had to enhance the image shown in Fig ~\ref{fig:lctext}. We observe from the histogram that there is a uniformity at a global level. Hence global transformations will not have much of an effect.
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[clip,height=2cm]{lctext}
+            \includegraphics[clip,height=4cm]{lctexthist}
+            \caption{Image and its histogram}
+            \label{fig:lctext}
+        \end{figure}
+        In Fig ~\ref{fig:lctextlefthist} we analyse a section of the image we observe that the local histograms are not equalized. 
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[clip,height=4cm]{lctextlefthist}
+            \caption{Plot Histogram of \(100X100\) section of the image}
+            \label{fig:lctextlefthist}
+        \end{figure}
 
-\section{Convolution}
-We implemeneted a function \texttt{my2Dconv()} that takes an Image(\(I\)) and kernel(\(k\)) and output \(y=I*k\).         
-We use the following kernel:
-\(k = \begin{pmatrix}
-            1 & 2 & 1 \\
-            0 & 0 & 0 \\
-            -1 & -2 & -1
-            \end{pmatrix}
-\)
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[clip,height=3cm]{convolvemy}
-        \includegraphics[clip,height=3cm]{convolvescv}
-        \caption{Outputs using kernel(k). Left: Using my2DConv function. Right: Using built-in function}
-    \end{figure}
+        Hence we apply local histogram equalization on a block size of \(8X8\) using the built-in function adapthisteq. The result is shown in Fig ~\ref{fig:lctextenhanced}
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[clip,height=2cm]{lctextenhanced}
+            \caption{Enhanced image after applying local histogram equalization}
+            \label{fig:lctextenhanced}
+        \end{figure}
 
-\section{Deriving popular convolution masks}
-Given a \(3X3\) neighbourhood(\(F\)) of an image 
-    \\\(F = \begin{bmatrix}
-            f(-1,-1) && f(-1,0) && f(-1,1) \\
-            f(0,-1) && f(0,0) && f(0,1) \\ 
-            f(1,-1) && f(1,0) && f(1,1) 
-            \end{bmatrix}\)
-    \\
-    The equation of the actual plane
-    \\ \(g(x,y) = a + bx + cy. \)
-    Now we have \(F = G + \eta \)
-    \subsection{Finding \(\beta\)}
-    For this we use the \texttt{lstsq} function built-in Numpy for finding least square solution to a linear matrix equation.
-    This function solves the equation \(F=X\beta\) by computing \(\beta\) such that it minimizes the Euclidean 2-norm \(\|F-X\beta\|^2\). \\
-    We get the following values of a,b and c for the first \(3X3\) neighbourhood.
-    \\\( \beta = 
-        \begin{bmatrix}
-            161.0 && -0.5 && -0.5
-        \end{bmatrix}
-    \)
-
-    \subsection{Finding convolution masks}
-    We find the pseudo-inverse of X using the built-in function \texttt{pinv}. We get the following matrices for our convolution masks
-    \\\(M1 = \begin{bmatrix}
-            0.1 && 0.1 && 0.1 \\ 0.1 && 0.1 && 0.1 \\ 0.1 && 0.1 && 0.1
-
-        \end{bmatrix}
-      \\
-      M2 = \begin{bmatrix}
-           -0.2 && -0.2 && -0.2 \\ 0 && 0 && 0 \\ 0.2 && 0.2 && 0.2
-          \end{bmatrix}
-      \\
-      M3 = \begin{bmatrix}
-          -0.2 && 0 && 0.2 \\ -0.2 && 0 && 0.2 \\ -0.2 && 0 && 0.2
-            \end{bmatrix}
-     \)
-    \subsection{Finding convolution masks using error weights}
-    We multiply the noise weights with original masks to obtain new masks.
-    \\
-    \(
-      M_{w1} = \begin{bmatrix}
-            0.1 && 0.2 && 0.1\\
-            0.2 && 0.4 && 0.2\\
-            0.1 && 0.2 && 0.1
-          \end{bmatrix}
-      \\
-      M_{w2} = \begin{bmatrix}
-            -0.17 && -0.33 && -0.17\\
-              0 && 0 && 0  \\
-             0.17 && 0.33 && 0.17
-          \end{bmatrix}
-      \\
-      M_{w3} = \begin{bmatrix}
-            -0.17 &&  0 && 0.17 \\ 
-            -0.33 && 0 &&  0.33 \\ 
-            -0.17 && 0 &&  0.17
-          \end{bmatrix}
-    \)
-    \subsection{Results}
-
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[clip,height=3cm]{conv1}
-        \includegraphics[clip,height=3cm]{conv2}
-        \includegraphics[clip,height=3cm]{conv3}
-
-        \includegraphics[clip,height=3cm]{convw1}
-        \includegraphics[clip,height=3cm]{convw2}
-        \includegraphics[clip,height=3cm]{convw3}
-
-        \caption{Starting from top-left, results of applying the convolution masks dervied(\(M1,M2,M3,M_{w1}, M_{w2}, M_{w3}\)) in clockwise direction. }
-    \end{figure}
-        
-    We observe that the masks work like the masks for edge detection. Results of \(M2, M2\) are similar to Prewitt operator. Results of \(M_{w2}, M_{w3}\) are similar to Sobel mask in X and Y orientation.
+\section{Exact histogram equalization}
+adfssadf.
 \end{document}
