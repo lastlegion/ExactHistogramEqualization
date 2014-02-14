@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.1.21)  14 FEB 2014 18:29
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.1.21)  14 FEB 2014 20:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -417,9 +417,6 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-LaTeX Warning: Reference `fig:lctext' on page 2 undefined on input line 104.
-
 <../images/lctext.jpg, id=39, 390.45876pt x 130.4875pt>
 File: ../images/lctext.jpg Graphic file (type jpg)
 
@@ -434,10 +431,6 @@ File: ../images/lctexthist.jpg Graphic file (type jpg)
 Package pdftex.def Info: ../images/lctexthist.jpg used on input line 108.
 (pdftex.def)             Requested size: 151.73839pt x 113.81102pt.
 
-
-LaTeX Warning: Reference `fig:lctextlefthist' on page 2 undefined on input line
- 112.
-
 <../images/lctextlefthist.jpg, id=43, 803.0pt x 602.25pt>
 File: ../images/lctextlefthist.jpg Graphic file (type jpg)
 
@@ -451,10 +444,6 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-LaTeX Warning: Reference `fig:lctextenhanced' on page 2 undefined on input line
- 120.
-
 <../images/lctextenhanced.jpg, id=45, 390.45876pt x 130.4875pt>
 File: ../images/lctextenhanced.jpg Graphic file (type jpg)
 
@@ -465,47 +454,49 @@ Package pdftex.def Info: ../images/lctextenhanced.jpg used on input line 123.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[2 <../images/logscene.png (PNG copy)> <../images/logscenehist.png>] [3 <../ima
-ges/gamma67.png (PNG copy)> <../images/gamma57.png (PNG copy)> <../images/gamma
-47.png (PNG copy)> <../images/gamma37.png (PNG copy)> <../images/gamma20.png (P
-NG copy)> <../images/gamma10.png (PNG copy)> <../images/gamma04.png (PNG copy)>
-]
+<../images/exacthist.jpg, id=47, 803.0pt x 602.25pt>
+File: ../images/exacthist.jpg Graphic file (type jpg)
+
+<use ../images/exacthist.jpg>
+Package pdftex.def Info: ../images/exacthist.jpg used on input line 133.
+(pdftex.def)             Requested size: 151.73839pt x 113.81102pt.
+ [2 <../images/logscene.png (PNG copy)> <../images/logscenehist.png>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[3 <../images/gamma67.png (PNG copy)> <../images/gamma57.png (PNG copy)> <../im
+ages/gamma47.png (PNG copy)> <../images/gamma37.png (PNG copy)> <../images/gamm
+a20.png (PNG copy)> <../images/gamma10.png (PNG copy)> <../images/gamma04.png (
+PNG copy)>]
 
 LaTeX Warning: Text page 4 contains only floats.
 
 [4 <../images/lctext.jpg> <../images/lctexthist.jpg> <../images/lctextlefthist.
-jpg> <../images/lctextenhanced.jpg>] (./assignment_3.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+jpg> <../images/lctextenhanced.jpg>] [5 <../images/exacthist.jpg>]
+(./assignment_3.aux) ) 
 Here is how much of TeX's memory you used:
- 4164 strings out of 495059
- 58991 string characters out of 3182030
- 141848 words of memory out of 3000000
- 7255 multiletter control sequences out of 15000+200000
- 18520 words of font info for 53 fonts, out of 3000000 for 9000
+ 4168 strings out of 495059
+ 59108 string characters out of 3182030
+ 141888 words of memory out of 3000000
+ 7259 multiletter control sequences out of 15000+200000
+ 17737 words of font info for 52 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  47i,10n,47p,539b,249s stack positions out of 5000i,500n,10000p,200000b,50000s
- </home/ganesh/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/
-ganesh/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.600pk> </home/ganesh/.te
-xmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </home/ganesh/.texmf-var/fo
-nts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </home/ganesh/.texmf-var/fonts/pk/ljf
-our/jknappen/ec/ecrm1095.600pk> </home/ganesh/.texmf-var/fonts/pk/ljfour/jknapp
-en/ec/ecrm1440.600pk> </home/ganesh/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm
-2074.600pk> </home/ganesh/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1095.600pk
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on assignment_3.pdf (4 pages, 1877304 bytes).
+ </home/ganesh/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecs
+x1095.600pk> </home/ganesh/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600p
+k> </home/ganesh/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </home/
+ganesh/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/ganesh/.te
+xmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/ganesh/.texmf-var/fo
+nts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/ganesh/.texmf-var/fonts/pk/ljf
+our/jknappen/ec/eccc1095.600pk></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on assignment_3.pdf (5 pages, 1927598 bytes).
 PDF statistics:
- 286 PDF objects out of 1000 (max. 8388607)
- 74 compressed objects within 1 object stream
+ 296 PDF objects out of 1000 (max. 8388607)
+ 73 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 172 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 183 words of extra memory for PDF output out of 10000 (max. 10000000)
 

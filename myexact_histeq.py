@@ -7,7 +7,7 @@ def unique_rows(a):
     return unique_a.view(a.dtype).reshape((unique_a.shape[0], a.shape[1]))
 
 
-I = SimpleCV.Image("lena.jpg")
+I = SimpleCV.Image("images/scene.jpg")
 
 F2 = [[0,1,0],[1,1,1],[0,1,0]]
 F2 = (1/5.0)*np.matrix(F2)
@@ -32,50 +32,48 @@ Inp = I.getGrayNumpy()
 #FR = Inp.reshape(I.width*I.height,1)
 FR[:,:,0] = Inp
 ##Apply filters
-FR[:,:,0] = I.convolve(F[0]).getGrayNumpy()
+#FR[:,:,0] = I.convolve(F[0]).getGrayNumpy()
 for i in range(0,5):
     FR[:,:,i+1] = I.convolve(F[i]).getGrayNumpy()
 FR = FR.reshape(I.width*I.height,6)
+#print FR[10:100,:]
 #print FR
 
 #Ordering accuracy
 n_unique = unique_rows(FR)
-print n_unique
-print n_unique.shape
+#print n_unique
+#print n_unique.shape
 #print FR[100:120,100:120,:]
+
+print n_unique
+print n_unique.shape[0]
+if(n_unique.shape[0] < I.width*I.height):
+    print "Error! K=6 is not enough for this image"
 '''
 for i in range(0,6):
 
 '''
-#Lexicographic sorting
-indx_o = np.lexsort((FR[:,0], FR[:,1], FR[:,2], FR[:,3], FR[:,4], FR[:,5]))
-print indx_o
-print indx_o.shape
-
-#Divide sorted list into 255 parts each having M*N/255 elements
+FS = np.argsort(FR,0)[:,0]
 bin_size = I.width*I.height/256
-'''
-bins = []
-for i in range(0,255):
-    bins.append([indx_o[i*bin_size:i*bin_size+bin_size]])
-print len(bins)
-print len(bins[250][0])
-print bin_size
-'''
-print "Bin size" 
-print bin_size
+
 #Now for each pixel find the corresponding graylevel
 #Create a new vector Ieq such that it is equalized
-Ieq = np.zeros((I.width*I.height,1))
-for i in range(0,I.width*I.height):
-    Ieq[i] = indx_o[i]/bin_size
 
-Ieq = Ieq.reshape((I.width,I.height))
+
+Ieq = np.zeros((I.width, I.height))
+count=0
+#
+for i in range(0, I.width):
+    for j in range(0, I.height):
+        Ieq[i,j] = (FS[count])*255/float(I.width*I.height)
+        count=count+1
+
+
 Op = SimpleCV.Image(Ieq)
 Op.show()
-hist = Op.histogram(255)
-plt.plot(hist)
-plt.show()
-a=raw_input()
-#print len(bins[0])
-#print bins
+x = raw_input()
+hist_data = Ieq.reshape(I.width*I.height,1)
+plt.hist(hist_data,255)
+
+plt.savefig("exacthist.jpg")
+
